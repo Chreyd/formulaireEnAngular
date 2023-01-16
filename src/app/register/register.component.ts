@@ -21,8 +21,8 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.registerForm=this.fb.record({
-      firstName: [''],
-      lastName: {value: 'invalid h', disabled : true},
+      firstName: '',
+      lastName: '',
       email: '',
       sendCatalog: false,
     })

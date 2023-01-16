@@ -3,25 +3,25 @@
     s'enregistrer
   </div>
   <div class="card-body">
-    <form action="">
+    <form (ngSubmit)="saveData(registerForm)" #registerForm="ngForm">
       <div class="from-row">
         <div class="col-md-6 mb-3">
-          <label for="nom">Nom</label>
-          <input type="text" name="nom" id="nom" class="form-control" placeholder="Nom">
+          <label for="lastName">Nom</label>
+          <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Nom" [(ngModel)]="user.lastName">
         </div>
         <div class="col-md-6 mb-3">
-          <label for="prenom">Prenom</label>
-          <input type="text" name="prenom" id="prenom" class="form-control" placeholder="prenom">
+          <label for="firstName">Prenom</label>
+          <input type="text" name="firstName" id="firstName" class="form-control" placeholder="prenom" [(ngModel)]="user.firstName">
         </div>
       </div>
       <div class="from-row">
         <div class="col-md-6 mb-3">
-          <label for="nom">Email</label>
-          <input type="email" name="email" id="email" class="form-control" placeholder="email">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" class="form-control" placeholder="email" [(ngModel)]="user.email">
         </div>
       </div>
       <div class="text-right">
-        <button class="btn btn-info">Sauvegarder</button>
+        <button class="btn btn-info" type="submit">Sauvegarder</button>
       </div>
     </form>
   </div>

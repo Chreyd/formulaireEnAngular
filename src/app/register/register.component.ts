@@ -9,16 +9,15 @@ import { User } from './user';
 })
 export class RegisterComponent implements OnInit {
 
-  public registerForm: FormGroup | undefined;
+  public registerForm!: FormGroup;
 
   public user : User = new User();
   public saveData( ){
     console.log(this.registerForm);
-    console.log('object', String(JSON.stringify(this.registerForm?.value)))
+    console.log('object', JSON.stringify(this.registerForm?.value))
   }
 
   constructor(){
-
   }
   ngOnInit(): void {
     this.registerForm = new FormGroup({

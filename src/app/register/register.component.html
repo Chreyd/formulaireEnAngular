@@ -79,20 +79,47 @@
       <div class="form-row d-flex">
         <div class="col-md-6 m-1">
           <label for="phoneId">Telephone</label>
-          <input type="tel" name="" id="phoneId" class="form-control" placeholder="Numéro de téléphone">
+          <input
+            formControlName="phone"
+            type="tel"
+            id="phoneId"
+            class="form-control"
+            placeholder="Numéro de téléphone"
+            [ngClass]="{ 'is-invalid': registerForm.get('phone')?.invalid }"
+          />
+          <div class="invalid-feedback">
+            <span *ngIf="registerForm.get('phone')?.errors?.['required']">
+              Veuillez entrer votre numéro de téléphone
+            </span>
+          </div>
         </div>
         <div class="col-md-6 m-1">
           <label for="notification">Recevoir des notifications</label>
           <div class="col-md-8">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="" id="">
+                <input
+                  formControlName="notification"
+                  value="email"
+                  type="radio"
+                  class="form-check-input"
+                  id=""
+                  (click)="setNotificationSetting('email')"
+                />
                 Email
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="" id="">
+                <input
+                  formControlName="notification"
+                  value="texte"
+                  type="radio"
+                  class="form-check-input"
+                  id=""
+                  (click)="setNotificationSetting('texte')"
+
+                />
                 Texte
               </label>
             </div>

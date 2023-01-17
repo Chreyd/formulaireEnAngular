@@ -8,6 +8,7 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { User } from './user';
+import { IErrors } from './x';
 // import { ratingRangeValidator } from './x';
 
 function ratingRangeValidator( min: number, max: number): ValidatorFn{
@@ -42,6 +43,20 @@ function emailMatcher(c: AbstractControl):{ [ key : string] : boolean } | null{
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+
+  public errorMsg: string | undefined ;
+
+  private validationErrorsMessages: IErrors = <IErrors>{
+    required: 'Merci de d\'entrer votre Email',
+    email: 'l\'Email ne correspond pas'
+  };
+/*   private validationErrorsMessages ={
+    required: 'Merci de d\'entrer votre Email',
+    email: 'l\'Email ne correspond pas'
+  }; */
+
+
+
   public registerForm!: FormGroup;
 
   public user: User = new User();
@@ -80,12 +95,19 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.get('notification')?.valueChanges.subscribe(value=> this.setNotificationSetting(value));
 
+
     /*     this.registerForm = new FormGroup({
       firstName: new FormControl(),
       lastName: new FormControl(),
       email: new FormControl(),
       sendCatalog: new FormControl(true),
     }); */
+
+    const emailControl = this.registerForm.get('emailGroup.email');
+    emailControl?.valueChanges.subscribe(value=>{
+      console.log(value);
+      this.setMessage(emailControl);
+    })
   }
 
   public fillFormData(): void {
@@ -101,5 +123,19 @@ export class RegisterComponent implements OnInit {
       email: "chre@tset.com",
       sendCatalog: true,
     }) */
+  }
+
+
+  private setMessage(val: AbstractControl): void{
+    this.errorMsg='';
+
+    if((val.touched || val.dirty) && val.errors){
+      // console.log(Object.keys(val.errors));
+
+      this.errorMsg = Object.keys(val.errors).map(
+        key=> this.validationErrorsMessages[key as keyof IErrors]
+      ).join(' ');
+    };
+    // console.log(this.errorMsg);
   }
 }

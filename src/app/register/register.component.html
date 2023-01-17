@@ -9,7 +9,6 @@
             type="text"
             id="lastName"
             class="form-control"
-            required
             placeholder="Nom"
             formControlName="lastName"
             [ngClass]="{
@@ -17,7 +16,6 @@
                 registerForm.get('lastName')?.touched &&
                 !registerForm.get('lastName')?.valid
             }"
-            minlength="4"
           />
           <div class="invalid-feedback">
             <span *ngIf="registerForm.get('lastName')?.errors?.['required']">
@@ -34,8 +32,6 @@
             type="text"
             id="firstName"
             class="form-control"
-            required
-            maxlength="10"
             placeholder="prenom"
             formControlName="firstName"
             [ngClass]="{
@@ -61,7 +57,6 @@
             type="email"
             id="email"
             class="form-control"
-            required
             placeholder="email"
             formControlName="email"
             [ngClass]="{
@@ -69,7 +64,6 @@
                 registerForm.get('email')?.touched &&
                 !registerForm.get('email')?.valid
             }"
-            email
           />
           <div class="invalid-feedback">
             <span *ngIf="registerForm.get('email')?.errors?.['required']">
@@ -78,6 +72,30 @@
             <span *ngIf="registerForm.get('email')?.errors?.['email']">
               Email invalide
             </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row d-flex">
+        <div class="col-md-6 m-1">
+          <label for="phoneId">Telephone</label>
+          <input type="tel" name="" id="phoneId" class="form-control" placeholder="Numéro de téléphone">
+        </div>
+        <div class="col-md-6 m-1">
+          <label for="notification">Recevoir des notifications</label>
+          <div class="col-md-8">
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="" id="">
+                Email
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="" id="">
+                Texte
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -135,7 +153,11 @@
       </div> -->
 
       <div class="text-right">
-        <button type="button" class="btn btn-outline-info bnt-online-info m-2" (click)="fillFormData()">
+        <button
+          type="button"
+          class="btn btn-outline-info bnt-online-info m-2"
+          (click)="fillFormData()"
+        >
           Remplir les champs par défaut
         </button>
 

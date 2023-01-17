@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { User } from './user';
 
 @Component({
@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.registerForm=this.fb.record({
-      firstName: '',
-      lastName: '',
-      email: '',
+      firstName: ['',[Validators.required, Validators.maxLength(10)]],
+      lastName: ['',[Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
       sendCatalog: false,
     })
 

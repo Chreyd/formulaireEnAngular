@@ -61,8 +61,9 @@
             formControlName="email"
             [ngClass]="{
               'is-invalid':
-                registerForm.get('emailGroup.email')?.touched &&
-                !registerForm.get('emailGroup.email')?.valid
+                registerForm.get('emailGroup')?.errors ||
+                (registerForm.get('emailGroup.email')?.touched &&
+                registerForm.get('emailGroup.email')?.invalid)
             }"
           />
           <div class="invalid-feedback">
@@ -77,18 +78,26 @@
         <div class="col-md-6 mb-3 m-1">
           <label for="confirmEmailId">Confirmez l'Email</label>
           <input
+            email
             type="email"
             name=""
             placeholder="Confirmez l'Email(requis)"
             formControlName="confirmEmail"
             id="confirmEmailId"
             class="form-control"
+            [ngClass]="{
+              'is-invalid': registerForm.get('emailGroup')?.errors ||
+              (
+                (registerForm.get('emailGroup.confirmEmail')?.touched ||
+                registerForm.get('emailGroup.confirmEmail')?.dirty) &&
+                registerForm.get('emailGroup.confirmEmail')?.invalid)
+            }"
           />
           <div class="invalid-feedback">
-            <span>
+            <span *ngIf="registerForm.get('emailGroup.confirmEmail')?.errors?.['required']">
               Merci de d'entrer votre Email
-            </span>
-            <span>
+            </span >
+            <span *ngIf="registerForm.get('emailGroup')?.errors?.['match'] ">
               l'Email ne correspond pas
             </span>
           </div>

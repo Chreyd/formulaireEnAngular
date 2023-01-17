@@ -78,6 +78,8 @@ export class RegisterComponent implements OnInit {
       sendCatalog: false,
     });
 
+    this.registerForm.get('notification')?.valueChanges.subscribe(value=> this.setNotificationSetting(value));
+
     /*     this.registerForm = new FormGroup({
       firstName: new FormControl(),
       lastName: new FormControl(),

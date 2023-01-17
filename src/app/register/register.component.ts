@@ -5,26 +5,28 @@ import {
   FormBuilder,
   Validators,
   AbstractControl,
+  ValidatorFn,
 } from '@angular/forms';
 import { User } from './user';
 // import { ratingRangeValidator } from './x';
 
+function ratingRangeValidator( min: number, max: number): ValidatorFn{
+  return (c: AbstractControl): { [key: string]: boolean } | null =>{
 
-export function ratingRangeValidator(c: AbstractControl):{ [ key : string] : boolean } | null{
+    if (c.value != null && (isNaN(c.value) || c.value < min || c.value > max)) {
+      return { 'rangeError': true };
+    }
+    return null;
 
-  if(!!c.value && (isNaN(c.value)) || c.value>1 || c.value<5){
-    return {'rangeError': true};
-  }
-  return null;
+  };
 }
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-
-
-
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
 
@@ -53,7 +55,7 @@ export class RegisterComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.minLength(4)]],
       email: ['', [Validators.required, Validators.email]],
       phone: '',
-      rating: [null, ratingRangeValidator],
+      rating: [null, ratingRangeValidator(1,5)],
       notification: 'email',
       sendCatalog: false,
     });

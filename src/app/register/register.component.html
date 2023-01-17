@@ -50,8 +50,8 @@
           </div>
         </div>
       </div>
-      <div class="from-row">
-        <div class="col-md-6 mb-3">
+      <div class="from-row d-flex" formGroupName="emailGroup">
+        <div class="col-md-6 mb-3 m-1">
           <label for="email">Email</label>
           <input
             type="email"
@@ -61,16 +61,35 @@
             formControlName="email"
             [ngClass]="{
               'is-invalid':
-                registerForm.get('email')?.touched &&
-                !registerForm.get('email')?.valid
+                registerForm.get('emailGroup.email')?.touched &&
+                !registerForm.get('emailGroup.email')?.valid
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('email')?.errors?.['required']">
+            <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['required']">
               Entrez votre Email
             </span>
-            <span *ngIf="registerForm.get('email')?.errors?.['email']">
+            <span *ngIf="registerForm.get('emailGroup.email')?.errors?.['email']">
               Email invalide
+            </span>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3 m-1">
+          <label for="confirmEmailId">Confirmez l'Email</label>
+          <input
+            type="email"
+            name=""
+            placeholder="Confirmez l'Email(requis)"
+            formControlName="confirmEmail"
+            id="confirmEmailId"
+            class="form-control"
+          />
+          <div class="invalid-feedback">
+            <span>
+              Merci de d'entrer votre Email
+            </span>
+            <span>
+              l'Email ne correspond pas
             </span>
           </div>
         </div>
@@ -137,9 +156,9 @@
             formControlName="rating"
             [ngClass]="{
               'is-invalid':
-              (registerForm.get('rating')?.touched ||
-              registerForm.get('rating')?.dirty) &&
-              registerForm.get('rating')?.invalid
+                (registerForm.get('rating')?.touched ||
+                  registerForm.get('rating')?.dirty) &&
+                registerForm.get('rating')?.invalid
             }"
           />
           <div class="invalid-feedback">

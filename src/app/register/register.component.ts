@@ -53,10 +53,13 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.record({
       firstName: ['', [Validators.required, Validators.maxLength(10)]],
       lastName: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.email]],
       phone: '',
       rating: [null, ratingRangeValidator(1,5)],
       notification: 'email',
+      emailGroup: this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail:['',[Validators.required]],
+      }),
       sendCatalog: false,
     });
 

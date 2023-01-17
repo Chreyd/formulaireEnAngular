@@ -3,7 +3,7 @@
   <div class="card-body">
     <form novalidate (ngSubmit)="saveData()" [formGroup]="registerForm">
       <div class="from-row d-flex">
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 m-1">
           <label for="lastName">Nom</label>
           <input
             type="text"
@@ -26,7 +26,7 @@
             </span>
           </div>
         </div>
-        <div class="col-md-6 mb-3">
+        <div class="col-md-6 mb-3 m-1">
           <label for="firstName">Prenom</label>
           <input
             type="text"
@@ -127,8 +127,12 @@
         </div>
       </div>
 
-      <div class="form-row mb-3">
-        <div class="col-md-12">
+      <div class="form-row mb-3 d-flex">
+        <div class="col-md-6 m-1">
+          <label for="ratingId">Note</label>
+          <input type="number" name="" id="ratingId" class="form-control" formControlName="rating">
+        </div>
+        <div class="col-md-6">
           <div class="from-check mt-4 pt-3">
             <label for="sendCatalogId" class="form-check-label">
               <input

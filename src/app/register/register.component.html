@@ -294,7 +294,18 @@
             </div>
           </div>
         </div>
+
+        <div class="form-group row mb-2">
+          <div class="col-md-4">
+            <button (click)="addAddress()" type="button" class="btn btn-outline-info">
+              Ajouter une adresse
+            </button>
+          </div>
+        </div>
+
       </div>
+
+
 
       <div class="text-right">
         <button
@@ -322,5 +333,6 @@
 <p>Pristine : {{ registerForm.pristine }}</p>
 <p>Valid : {{ registerForm.valid }}</p>
 <p>Invalid : {{ registerForm.invalid }}</p>
+<p>Address bloc 1: {{addressList.get('0.street1')?.value}} </p>
 <p>Values :</p>
 <pre>{{ registerForm.value | json }} </pre>

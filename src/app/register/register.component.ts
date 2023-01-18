@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { User } from './user';
 import { IErrors } from './x';
+import {debounceTime} from 'rxjs/operators';
 // import { ratingRangeValidator } from './x';
 
 function ratingRangeValidator( min: number, max: number): ValidatorFn{
@@ -90,7 +91,13 @@ export class RegisterComponent implements OnInit {
         confirmEmail:['',[Validators.required]],
       },
       {validators: emailMatcher}),
-      sendCatalog: false,
+      sendCatalog: true,
+      addresseType: ['home'],
+      street1: [''],
+      street2: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
     });
 
     this.registerForm.get('notification')?.valueChanges.subscribe(value=> this.setNotificationSetting(value));
@@ -104,7 +111,7 @@ export class RegisterComponent implements OnInit {
     }); */
 
     const emailControl = this.registerForm.get('emailGroup.email');
-    emailControl?.valueChanges.subscribe(value=>{
+    emailControl?.valueChanges.pipe(debounceTime(1000)).subscribe(value=>{
       console.log(value);
       this.setMessage(emailControl);
     })

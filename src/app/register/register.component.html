@@ -185,111 +185,115 @@
       </div>
 
       <div *ngIf="registerForm.get('sendCatalog')?.value">
-        <div formArrayName="addresses" >
-
-
-        <div formGroupName="0">
-          <div class="form-group row mb-2">
-            <label class="col-md-2 col-form-label pt-0"> Type </label>
-            <div class="col-md-8">
-              <div class="form-check form-check-inline">
-                <label for="" class="form-check-label">
-                  <input
-                    type="radio"
-                    formControlName="addresseType"
-                    value="home"
-                    id=""
-                    class="form-check-input"
-                  />
-                  Domicile
-                </label>
+        <div
+          formArrayName="addresses"
+          *ngFor="
+            let address of addressList.controls;
+            let i = index
+          "
+        >
+          <div [formGroupName]="i">
+            <div class="form-group row mb-2">
+              <label class="col-md-2 col-form-label pt-0"> Type </label>
+              <div class="col-md-8">
+                <div class="form-check form-check-inline">
+                  <label attr.for="{{'addressTypeId1'+i}}" class="form-check-label">
+                    <input
+                      type="radio"
+                      formControlName="addresseType"
+                      value="home"
+                      id="{{'addressTypeId1'+i}}"
+                      class="form-check-input"
+                    />
+                    Domicile
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label attr.for="{{'addressTypeId2'+i}}" class="form-check-label">
+                    <input
+                      type="radio"
+                      formControlName="addresseType"
+                      value="work"
+                      id="{{'addressTypeId2'+i}}"
+                      class="form-check-input"
+                    />
+                    Lieu de travail
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label attr.for="{{'addressTypeId3'+i}}" class="form-check-label">
+                    <input
+                      type="radio"
+                      formControlName="addresseType"
+                      value="other"
+                      id="{{'addressTypeId3'+i}}"
+                      class="form-check-input"
+                    />
+                    Autre adresse
+                  </label>
+                </div>
               </div>
-              <div class="form-check form-check-inline">
-                <label for="" class="form-check-label">
-                  <input
-                    type="radio"
-                    formControlName="addresseType"
-                    value="work"
-                    id=""
-                    class="form-check-input"
-                  />
-                  Lieu de travail
-                </label>
-              </div>
-              <div class="form-check form-check-inline">
-                <label for="" class="form-check-label">
-                  <input
-                    type="radio"
-                    formControlName="addresseType"
-                    value="other"
-                    id=""
-                    class="form-check-input"
-                  />
-                  Autre adresse
-                </label>
-              </div>
             </div>
-          </div>
 
-          <div class="form-row mb-3">
-            <div class="col-md-12">
-              <label for="adresse1">Adresse 1</label>
-              <input
-                type="text"
-                formControlName="street1"
-                id="adresse1"
-                class="form-control"
-              />
+            <div class="form-row mb-3">
+              <div class="col-md-12">
+                <label attr.for="{{'streetId1'+i}}">Adresse 1</label>
+                <input
+                  type="text"
+                  formControlName="street1"
+                  id="{{'streetId1'+i}}"
+                  class="form-control"
+                />
+              </div>
             </div>
-          </div>
-          <div class="form-row mb-3">
-            <div class="col-md-12">
-              <label for="adresse2">Adresse 2</label>
-              <input
-                type="text"
-                formControlName="street2"
-                id="adresse2"
-                class="form-control"
-              />
+            <div class="form-row mb-3">
+              <div class="col-md-12">
+                <label attr.for="{{'streetId2'+i}}">Adresse 2</label>
+                <input
+                  type="text"
+                  formControlName="street2"
+                  id="{{'streetId2'+i}}"
+                  class="form-control"
+                />
+              </div>
             </div>
-          </div>
-          <div class="form-row d-flex">
-            <div class="col-md-6 mb-3 m-1">
-              <label for="ville">ville</label>
-              <input
-                type="text"
-                formControlName="city"
-                id="ville"
-                class="form-control"
-              />
-            </div>
-            <div class="col-md-3 mb-3 m-1">
-              <label for="departement">Departement</label>
-              <select
-                name=""
-                id="departement"
-                formControlName="state"
-                class="form-control"
-              >
-                <option value="">Sélectionnez un départemnet</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-            </div>
-            <div class="col-md-3 mb-3 m-1">
-              <label for="codePostal">Code postal</label>
-              <input
-                type="number"
-                formControlName="zip"
-                id="codePostal"
-                class="form-control"
-              />
+            <div class="form-row d-flex">
+              <div class="col-md-6 mb-3 m-1">
+                <label attr.for="{{'cityId'+i}}">ville</label>
+                <input
+                  type="text"
+                  formControlName="city"
+                  id="{{'cityId'+i}}"
+                  class="form-control"
+                />
+              </div>
+              <div class="col-md-3 mb-3 m-1">
+                <label attr.for="{{'stateId'+i}}">Departement</label>
+                <select
+                  name=""
+                  id="{{'stateId'+i}}"
+                  formControlName="state"
+                  class="form-control"
+                >
+                  <option value="">Sélectionnez un départemnet</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                  <option value="D">D</option>
+                </select>
+              </div>
+              <div class="col-md-3 mb-3 m-1">
+                <label attr.for="{{'zipId'+i}}">Code postal</label>
+                <input
+                  type="number"
+                  formControlName="zip"
+                  id="{{'zipId'+i}}"
+                  class="form-control"
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
 
       <div class="text-right">

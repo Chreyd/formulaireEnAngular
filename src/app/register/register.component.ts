@@ -79,6 +79,12 @@ export class RegisterComponent implements OnInit {
     phoneControl?.updateValueAndValidity();
   }
 
+  public get addressList():FormArray{
+
+    return <FormArray>this.registerForm.get('addresses')
+
+  }
+
   constructor(private fb: FormBuilder) {}
   ngOnInit(): void {
     this.registerForm = this.fb.record({

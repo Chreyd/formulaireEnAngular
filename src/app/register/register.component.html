@@ -60,12 +60,11 @@
             placeholder="email"
             formControlName="email"
             [ngClass]="{
-              'is-invalid':
-                errorMsg
+              'is-invalid': errorMsg
             }"
           />
           <div class="invalid-feedback">
-            {{errorMsg}}
+            {{ errorMsg }}
           </div>
         </div>
         <div class="col-md-6 mb-3 m-1">
@@ -79,17 +78,19 @@
             id="confirmEmailId"
             class="form-control"
             [ngClass]="{
-              'is-invalid': registerForm.get('emailGroup')?.errors ||
-              (
-                (registerForm.get('emailGroup.confirmEmail')?.touched ||
-                registerForm.get('emailGroup.confirmEmail')?.dirty) &&
-                registerForm.get('emailGroup.confirmEmail')?.invalid)
+              'is-invalid':
+                registerForm.get('emailGroup')?.errors ||
+                ((registerForm.get('emailGroup.confirmEmail')?.touched ||
+                  registerForm.get('emailGroup.confirmEmail')?.dirty) &&
+                  registerForm.get('emailGroup.confirmEmail')?.invalid)
             }"
           />
           <div class="invalid-feedback">
-            <span *ngIf="registerForm.get('emailGroup.confirmEmail')?.errors?.['required']">
+            <span
+              *ngIf="registerForm.get('emailGroup.confirmEmail')?.errors?.['required']"
+            >
               Merci de d'entrer votre Email
-            </span >
+            </span>
             <span *ngIf="registerForm.get('emailGroup')?.errors?.['match'] ">
               l'Email ne correspond pas
             </span>
@@ -184,65 +185,111 @@
       </div>
 
       <div *ngIf="registerForm.get('sendCatalog')?.value">
+        <div formArrayName="addresses" >
 
-        <div class="form-group row mb-2">
-          <label class="col-md-2 col-form-label pt-0">
-            Type
-          </label>
-          <div class="col-md-8">
-            <div class="form-check form-check-inline">
-              <label for="" class="form-check-label">
-                <input type="radio" formControlName="addresseType" value="home" id="" class="form-check-input">
-                Domicile
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <label for="" class="form-check-label">
-                <input type="radio" formControlName="addresseType" value="work" id="" class="form-check-input">
-                Lieu de travail
-              </label>
-            </div>
-            <div class="form-check form-check-inline">
-              <label for="" class="form-check-label">
-                <input type="radio" formControlName="addresseType" value="other" id="" class="form-check-input">
-                Autre adresse
-              </label>
-            </div>
-          </div>
-        </div>
 
-        <div class="form-row mb-3">
-          <div class="col-md-12">
-            <label for="adresse1">Adresse 1</label>
-            <input type="text" formControlName="street1" id="adresse1" class="form-control">
+        <div formGroupName="0">
+          <div class="form-group row mb-2">
+            <label class="col-md-2 col-form-label pt-0"> Type </label>
+            <div class="col-md-8">
+              <div class="form-check form-check-inline">
+                <label for="" class="form-check-label">
+                  <input
+                    type="radio"
+                    formControlName="addresseType"
+                    value="home"
+                    id=""
+                    class="form-check-input"
+                  />
+                  Domicile
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="" class="form-check-label">
+                  <input
+                    type="radio"
+                    formControlName="addresseType"
+                    value="work"
+                    id=""
+                    class="form-check-input"
+                  />
+                  Lieu de travail
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label for="" class="form-check-label">
+                  <input
+                    type="radio"
+                    formControlName="addresseType"
+                    value="other"
+                    id=""
+                    class="form-check-input"
+                  />
+                  Autre adresse
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row mb-3">
+            <div class="col-md-12">
+              <label for="adresse1">Adresse 1</label>
+              <input
+                type="text"
+                formControlName="street1"
+                id="adresse1"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-row mb-3">
+            <div class="col-md-12">
+              <label for="adresse2">Adresse 2</label>
+              <input
+                type="text"
+                formControlName="street2"
+                id="adresse2"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-row d-flex">
+            <div class="col-md-6 mb-3 m-1">
+              <label for="ville">ville</label>
+              <input
+                type="text"
+                formControlName="city"
+                id="ville"
+                class="form-control"
+              />
+            </div>
+            <div class="col-md-3 mb-3 m-1">
+              <label for="departement">Departement</label>
+              <select
+                name=""
+                id="departement"
+                formControlName="state"
+                class="form-control"
+              >
+                <option value="">Sélectionnez un départemnet</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3 m-1">
+              <label for="codePostal">Code postal</label>
+              <input
+                type="number"
+                formControlName="zip"
+                id="codePostal"
+                class="form-control"
+              />
+            </div>
           </div>
         </div>
-        <div class="form-row mb-3">
-          <div class="col-md-12">
-            <label for="adresse2">Adresse 2</label>
-            <input type="text" formControlName="street2" id="adresse2" class="form-control">
-          </div>
-        </div>
-        <div class="form-row d-flex">
-          <div class="col-md-6 mb-3 m-1">
-            <label for="ville">ville</label>
-            <input type="text" formControlName="city" id="ville" class="form-control">
-          </div>
-          <div class="col-md-3 mb-3 m-1">
-            <label for="departement">Departement</label>
-            <select name="" id="departement" formControlName="state" class="form-control">
-              <option value="" >Sélectionnez un départemnet</option>
-              <option value="A" >A</option>
-              <option value="B" >B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-            </select>
-          </div>
-          <div class="col-md-3 mb-3 m-1">
-            <label for="codePostal">Code postal</label>
-            <input type="number" formControlName="zip" id="codePostal" class="form-control">
-          </div>
-        </div>
+      </div>
       </div>
 
       <div class="text-right">

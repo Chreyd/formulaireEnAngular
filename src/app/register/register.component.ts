@@ -6,6 +6,7 @@ import {
   Validators,
   AbstractControl,
   ValidatorFn,
+  FormArray
 } from '@angular/forms';
 import { User } from './user';
 import { IErrors } from './x';
@@ -86,18 +87,16 @@ export class RegisterComponent implements OnInit {
       phone: '',
       rating: [null, ratingRangeValidator(1,5)],
       notification: 'email',
+
       emailGroup: this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         confirmEmail:['',[Validators.required]],
       },
       {validators: emailMatcher}),
       sendCatalog: true,
-      addresseType: ['home'],
-      street1: [''],
-      street2: [''],
-      city: [''],
-      state: [''],
-      zip: [''],
+
+      addresses: this.fb.array([ this.createAddresseGroup() ]),
+
     });
 
     this.registerForm.get('notification')?.valueChanges.subscribe(value=> this.setNotificationSetting(value));
@@ -114,6 +113,17 @@ export class RegisterComponent implements OnInit {
     emailControl?.valueChanges.pipe(debounceTime(1000)).subscribe(value=>{
       console.log(value);
       this.setMessage(emailControl);
+    })
+  }
+
+  private createAddresseGroup (): FormGroup{
+    return this.fb.group({
+      addresseType: ['home'],
+      street1: [''],
+      street2: [''],
+      city: [''],
+      state: [''],
+      zip: [''],
     })
   }
 
